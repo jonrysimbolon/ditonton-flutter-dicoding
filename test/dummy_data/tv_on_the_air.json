@@ -1,0 +1,22 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "backdrop_path": "/backdrop_ota.jpg",
+      "first_air_date": "2023-03-01",
+      "genre_ids": [18],
+      "id": 110,
+      "name": "On The Air TV",
+      "origin_country": ["US"],
+      "original_language": "en",
+      "original_name": "On The Air TV",
+      "overview": "Overview on the air tv series.",
+      "popularity": 90.0,
+      "poster_path": "/poster_ota.jpg",
+      "vote_average": 8.0,
+      "vote_count": 800
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 1
+}

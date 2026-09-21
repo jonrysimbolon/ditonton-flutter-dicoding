@@ -1,0 +1,36 @@
+{
+  "air_date": "2021-01-01",
+  "episodes": [
+    {
+      "air_date": "2021-01-01",
+      "episode_number": 1,
+      "id": 5001,
+      "name": "Pilot",
+      "overview": "Pilot episode overview.",
+      "runtime": 55,
+      "season_number": 1,
+      "show_id": 1,
+      "still_path": "/still1.jpg",
+      "vote_average": 8.0,
+      "vote_count": 100
+    },
+    {
+      "air_date": "2021-01-08",
+      "episode_number": 2,
+      "id": 5002,
+      "name": "Second Episode",
+      "overview": "Second episode overview.",
+      "runtime": 50,
+      "season_number": 1,
+      "show_id": 1,
+      "still_path": "/still2.jpg",
+      "vote_average": 8.3,
+      "vote_count": 90
+    }
+  ],
+  "id": 1001,
+  "name": "Season 1",
+  "overview": "Season 1 overview.",
+  "poster_path": "/season1.jpg",
+  "season_number": 1
+}
