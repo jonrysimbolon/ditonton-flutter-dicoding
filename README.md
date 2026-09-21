@@ -68,6 +68,8 @@ flutter test integration_test
 
 Proyek ini menggunakan [Codemagic](https://codemagic.io/) untuk menjalankan pengujian unit dan widget secara otomatis pada setiap push ke repository. Build akan dihentikan jika terdapat pengujian yang gagal.
 
+Build status terakhir: **passed** pada commit `3bc94ce` — [Lihat hasil build (Codemagic)](https://github.com/jonrysimbolon/ditonton-flutter-dicoding/runs/106430488334)
+
 ## Author
 
 **Jonry Simbolon**
