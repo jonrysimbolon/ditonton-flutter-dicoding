@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ditonton_core/common/analytics.dart';
 import 'package:ditonton_core/common/constants.dart';
 import 'package:ditonton_core/common/state_enum.dart';
 import 'package:ditonton_core/domain/entities/genre.dart';
@@ -154,6 +155,10 @@ class _WatchlistButton extends StatelessWidget {
       onPressed: () async {
         final messenger = ScaffoldMessenger.of(context);
         final bloc = context.read<MovieDetailBloc>();
+        logAnalyticsEvent('watchlist_toggle', parameters: {
+          'action': isAddedWatchlist ? 'remove' : 'add',
+          'id': movie.id,
+        });
         if (!isAddedWatchlist) {
           bloc.add(AddMovieWatchlist(movie));
         } else {

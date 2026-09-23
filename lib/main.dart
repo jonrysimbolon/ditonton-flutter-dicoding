@@ -46,6 +46,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'firebase_options.dart';
+
+const bool crashOnStartup = bool.fromEnvironment('CRASH_TEST', defaultValue: false);
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.environment['FLUTTER_TEST'] != 'true') {
@@ -62,6 +65,11 @@ Future<void> main() async {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
       return true;
     };
+    if (crashOnStartup) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        FirebaseCrashlytics.instance.crash();
+      });
+    }
   }
   HttpOverrides.global = SslPinningHttpOverrides();
   di.init();

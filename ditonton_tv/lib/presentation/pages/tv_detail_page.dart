@@ -1,3 +1,4 @@
+import 'package:ditonton_core/common/analytics.dart';
 import 'package:ditonton_core/common/state_enum.dart';
 import 'package:ditonton_tv/presentation/bloc/tv_detail_bloc.dart';
 import 'package:ditonton_tv/presentation/widgets/tv_detail_content.dart';
@@ -25,6 +26,10 @@ class _TVDetailPageState extends State<TVDetailPage> {
       context.read<TVDetailBloc>()
         ..add(FetchTVDetail(widget.id))
         ..add(LoadTVWatchlistStatus(widget.id));
+      logAnalyticsEvent('detail_view', parameters: {
+        'type': 'tv',
+        'id': widget.id,
+      });
     });
   }
 

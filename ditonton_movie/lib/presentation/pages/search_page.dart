@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ditonton_core/common/analytics.dart';
 import 'package:ditonton_core/common/constants.dart';
 import 'package:ditonton_core/common/state_enum.dart';
 import 'package:ditonton_movie/presentation/bloc/movie_search_bloc.dart';
@@ -28,6 +29,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void _search(String query) {
+    logAnalyticsEvent('search_movie', parameters: {'query': query});
     context.read<MovieSearchBloc>().add(FetchMovieSearch(query));
   }
 

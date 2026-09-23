@@ -1,3 +1,4 @@
+import 'package:ditonton_core/common/analytics.dart';
 import 'package:ditonton_core/common/state_enum.dart';
 import 'package:ditonton_movie/presentation/bloc/movie_detail_bloc.dart';
 import 'package:ditonton_movie/presentation/widgets/movie_detail_content.dart';
@@ -24,6 +25,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
       context.read<MovieDetailBloc>()
         ..add(FetchMovieDetail(widget.id))
         ..add(LoadMovieWatchlistStatus(widget.id));
+      logAnalyticsEvent('detail_view', parameters: {
+        'type': 'movie',
+        'id': widget.id,
+      });
     });
   }
 
