@@ -47,7 +47,7 @@ class _WatchlistTVsPageState extends State<WatchlistTVsPage> with RouteAware {
               return const Center(child: CircularProgressIndicator());
             } else if (state.watchlistState == RequestState.loaded) {
               return ListView.builder(
-                itemBuilder: (context, index) {
+                itemBuilder: (_, index) {
                   final tv = state.watchlistTvs[index];
                   return TVCard(tv);
                 },

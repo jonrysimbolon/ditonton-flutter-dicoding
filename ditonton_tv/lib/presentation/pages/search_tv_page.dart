@@ -71,7 +71,7 @@ class _SearchTVPageState extends State<SearchTVPage> {
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
+                      itemBuilder: (_, index) {
                         final tv = state.searchResult[index];
                         return TVCard(tv);
                       },

@@ -4,8 +4,8 @@ Aplikasi katalog film dan serial TV yang dibangun dengan Flutter. Proyek ini mer
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.47.5-blue)
 ![Dart](https://img.shields.io/badge/Dart-3.13.4-blue)
-![Coverage](https://img.shields.io/badge/coverage-97.64%25-brightgreen)
-![Tests](https://img.shields.io/badge/tests-365%20passed-success)
+![Coverage](https://img.shields.io/badge/coverage-97.12%25-brightgreen)
+![Tests](https://img.shields.io/badge/tests-371%20passed-success)
 
 ## Fitur
 
@@ -61,7 +61,7 @@ flutter run
 
 ## Pengujian
 
-Proyek ini memiliki 365 pengujian unit dan widget dengan cakupan kode 97.64%.
+Proyek ini memiliki 371 pengujian unit dan widget dengan cakupan kode 97.12%.
 
 ```
 flutter test
@@ -81,9 +81,9 @@ flutter test integration_test
 
 ## Continuous Integration
 
-Proyek ini menggunakan [Codemagic](https://codemagic.io/) untuk menjalankan pengujian unit dan widget secara otomatis pada setiap push ke repository. Build akan dihentikan jika terdapat pengujian yang gagal.
+Proyek ini menggunakan [Codemagic](https://codemagic.io/) dengan workflow `Ditonton CI` (`codemagic.yaml`). Pada setiap push, keempat paket (`ditonton` root, `ditonton_core`, `ditonton_movie`, dan `ditonton_tv`) dijalankan `flutter analyze` dan `flutter test` secara otomatis. Build akan dihentikan jika terdapat pengujian yang gagal.
 
-Build status terakhir: **passed** pada commit `3bc94ce` — [Lihat hasil build (Codemagic)](https://github.com/jonrysimbolon/ditonton-flutter-dicoding/runs/106430488334)
+Build status terakhir: **passed** — dijalankan otomatis oleh Codemagic pada setiap push.
 
 ## Author
 

@@ -1,10 +1,9 @@
 import 'package:ditonton_core/common/state_enum.dart';
-import 'package:ditonton_movie/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:ditonton_core/presentation/widgets/empty_watchlist.dart';
+import 'package:ditonton_movie/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:ditonton_movie/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 class WatchlistMoviesList extends StatelessWidget {
   const WatchlistMoviesList({super.key});
 
@@ -26,7 +25,7 @@ class WatchlistMoviesList extends StatelessWidget {
               );
             }
             return ListView.builder(
-              itemBuilder: (context, index) {
+              itemBuilder: (_, index) {
                 final movie = state.watchlistMovies[index];
                 return MovieCard(movie);
               },

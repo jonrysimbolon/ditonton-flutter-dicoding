@@ -57,7 +57,7 @@ class _TVSeasonPageState extends State<TVSeasonPage> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: detail.episodes.length,
-                      itemBuilder: (context, index) {
+                      itemBuilder: (_, index) {
                         final episode = detail.episodes[index];
                         return Card(
                           child: ListTile(

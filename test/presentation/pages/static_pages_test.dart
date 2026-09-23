@@ -144,6 +144,32 @@ void main() {
 
       expect(find.byKey(const Key('empty_watchlist_tv')), findsOneWidget);
     });
+
+    testWidgets('refetches both watchlists when the page is resumed', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MultiBlocProvider(
+          providers: [
+            BlocProvider<WatchlistMovieBloc>.value(
+              value: mockWatchlistMovieBloc,
+            ),
+            BlocProvider<WatchlistTVBloc>.value(value: mockWatchlistTvBloc),
+          ],
+          child: const MaterialApp(home: WatchlistPage()),
+        ),
+      );
+      await tester.pump();
+      clearInteractions(mockWatchlistMovieBloc);
+      clearInteractions(mockWatchlistTvBloc);
+
+      final dynamic state = tester.state(find.byType(WatchlistPage));
+      state.didPopNext();
+      await tester.pump();
+
+      verify(mockWatchlistMovieBloc.add(const FetchWatchlistMovies())).called(1);
+      verify(mockWatchlistTvBloc.add(const FetchWatchlistTVs())).called(1);
+    });
   });
 
   group('AboutPage', () {

@@ -1,39 +1,42 @@
+import 'dart:io' show HttpOverrides, Platform;
+import 'dart:ui' show PlatformDispatcher;
+
+import 'package:ditonton/injection.dart' as di;
+import 'package:ditonton/presentation/pages/about_page.dart';
+import 'package:ditonton/presentation/pages/home_movie_page.dart';
+import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:ditonton_core/common/constants.dart';
 import 'package:ditonton_core/common/ssl_pinning.dart';
 import 'package:ditonton_core/common/utils.dart';
-import 'package:ditonton/injection.dart' as di;
-import 'package:ditonton/presentation/pages/about_page.dart';
-import 'package:ditonton_tv/presentation/pages/airing_today_tvs_page.dart';
-import 'package:ditonton/presentation/pages/home_movie_page.dart';
-import 'package:ditonton_tv/presentation/pages/home_tv_page.dart';
-import 'package:ditonton_movie/presentation/pages/movie_detail_page.dart';
-import 'package:ditonton_tv/presentation/pages/on_the_air_tvs_page.dart';
-import 'package:ditonton_movie/presentation/pages/popular_movies_page.dart';
-import 'package:ditonton_tv/presentation/pages/popular_tvs_page.dart';
-import 'package:ditonton_movie/presentation/pages/search_page.dart';
-import 'package:ditonton_tv/presentation/pages/search_tv_page.dart';
-import 'package:ditonton_movie/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton_tv/presentation/pages/top_rated_tvs_page.dart';
-import 'package:ditonton_tv/presentation/pages/tv_detail_page.dart';
-import 'package:ditonton_tv/presentation/pages/tv_season_arguments.dart';
-import 'package:ditonton_tv/presentation/pages/tv_season_page.dart';
-import 'package:ditonton_movie/presentation/pages/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_page.dart';
-import 'package:ditonton_tv/presentation/pages/watchlist_tvs_page.dart';
-import 'package:ditonton_tv/presentation/bloc/airing_today_tvs_bloc.dart';
 import 'package:ditonton_movie/presentation/bloc/movie_detail_bloc.dart';
 import 'package:ditonton_movie/presentation/bloc/movie_list_bloc.dart';
 import 'package:ditonton_movie/presentation/bloc/movie_search_bloc.dart';
-import 'package:ditonton_tv/presentation/bloc/on_the_air_tvs_bloc.dart';
 import 'package:ditonton_movie/presentation/bloc/popular_movies_bloc.dart';
-import 'package:ditonton_tv/presentation/bloc/popular_tvs_bloc.dart';
 import 'package:ditonton_movie/presentation/bloc/top_rated_movies_bloc.dart';
+import 'package:ditonton_movie/presentation/bloc/watchlist_movie_bloc.dart';
+import 'package:ditonton_movie/presentation/pages/movie_detail_page.dart';
+import 'package:ditonton_movie/presentation/pages/popular_movies_page.dart';
+import 'package:ditonton_movie/presentation/pages/search_page.dart';
+import 'package:ditonton_movie/presentation/pages/top_rated_movies_page.dart';
+import 'package:ditonton_movie/presentation/pages/watchlist_movies_page.dart';
+import 'package:ditonton_tv/presentation/bloc/airing_today_tvs_bloc.dart';
+import 'package:ditonton_tv/presentation/bloc/on_the_air_tvs_bloc.dart';
+import 'package:ditonton_tv/presentation/bloc/popular_tvs_bloc.dart';
 import 'package:ditonton_tv/presentation/bloc/top_rated_tvs_bloc.dart';
 import 'package:ditonton_tv/presentation/bloc/tv_detail_bloc.dart';
 import 'package:ditonton_tv/presentation/bloc/tv_list_bloc.dart';
 import 'package:ditonton_tv/presentation/bloc/tv_search_bloc.dart';
-import 'package:ditonton_movie/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:ditonton_tv/presentation/bloc/watchlist_tv_bloc.dart';
+import 'package:ditonton_tv/presentation/pages/airing_today_tvs_page.dart';
+import 'package:ditonton_tv/presentation/pages/home_tv_page.dart';
+import 'package:ditonton_tv/presentation/pages/on_the_air_tvs_page.dart';
+import 'package:ditonton_tv/presentation/pages/popular_tvs_page.dart';
+import 'package:ditonton_tv/presentation/pages/search_tv_page.dart';
+import 'package:ditonton_tv/presentation/pages/top_rated_tvs_page.dart';
+import 'package:ditonton_tv/presentation/pages/tv_detail_page.dart';
+import 'package:ditonton_tv/presentation/pages/tv_season_arguments.dart';
+import 'package:ditonton_tv/presentation/pages/tv_season_page.dart';
+import 'package:ditonton_tv/presentation/pages/watchlist_tvs_page.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -43,10 +46,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'firebase_options.dart';
-
-import 'dart:io' show HttpOverrides, Platform;
-import 'dart:ui' show PlatformDispatcher;
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.environment['FLUTTER_TEST'] != 'true') {

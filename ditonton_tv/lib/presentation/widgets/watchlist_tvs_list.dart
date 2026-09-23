@@ -1,10 +1,9 @@
 import 'package:ditonton_core/common/state_enum.dart';
-import 'package:ditonton_tv/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:ditonton_core/presentation/widgets/empty_watchlist.dart';
+import 'package:ditonton_tv/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:ditonton_tv/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 class WatchlistTVsList extends StatelessWidget {
   const WatchlistTVsList({super.key});
 
@@ -26,7 +25,7 @@ class WatchlistTVsList extends StatelessWidget {
               );
             }
             return ListView.builder(
-              itemBuilder: (context, index) {
+              itemBuilder: (_, index) {
                 final tv = state.watchlistTvs[index];
                 return TVCard(tv);
               },

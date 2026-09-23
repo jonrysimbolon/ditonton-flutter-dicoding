@@ -164,4 +164,19 @@ void main() {
 
     expect(find.text('Ditonton'), findsOneWidget);
   });
+
+  testWidgets('tapping Top Rated heading opens the top rated movies page', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const MyApp());
+    await tester.pumpAndSettle();
+
+    final seeMore = find.text('See More');
+    await tester.ensureVisible(seeMore.at(1));
+    await tester.pumpAndSettle();
+    await tester.tap(seeMore.at(1), warnIfMissed: false);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(TopRatedMoviesPage), findsOneWidget);
+  });
 }

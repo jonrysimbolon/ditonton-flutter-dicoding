@@ -7,13 +7,12 @@ import 'package:ditonton_core/common/database_failure.dart';
 import 'package:ditonton_core/common/failure.dart';
 import 'package:ditonton_core/common/server_exception.dart';
 import 'package:ditonton_core/common/server_failure.dart';
-import 'package:ditonton_movie/data/datasources/movie_local_data_source.dart';
-import 'package:ditonton_movie/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton_core/data/models/movie_table.dart';
 import 'package:ditonton_core/domain/entities/movie.dart';
 import 'package:ditonton_core/domain/entities/movie_detail.dart';
+import 'package:ditonton_movie/data/datasources/movie_local_data_source.dart';
+import 'package:ditonton_movie/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton_movie/domain/repositories/movie_repository.dart';
-
 class MovieRepositoryImpl implements MovieRepository {
   final MovieRemoteDataSource remoteDataSource;
   final MovieLocalDataSource localDataSource;

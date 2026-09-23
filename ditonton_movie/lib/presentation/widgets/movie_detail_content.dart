@@ -7,9 +7,8 @@ import 'package:ditonton_core/domain/entities/movie_detail.dart';
 import 'package:ditonton_movie/presentation/bloc/movie_detail_bloc.dart';
 import 'package:ditonton_movie/presentation/pages/movie_detail_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class MovieDetailContent extends StatelessWidget {
   final MovieDetail movie;
   final List<Movie> recommendations;

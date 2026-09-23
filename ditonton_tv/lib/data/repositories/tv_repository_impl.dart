@@ -7,14 +7,13 @@ import 'package:ditonton_core/common/database_failure.dart';
 import 'package:ditonton_core/common/failure.dart';
 import 'package:ditonton_core/common/server_exception.dart';
 import 'package:ditonton_core/common/server_failure.dart';
-import 'package:ditonton_tv/data/datasources/tv_local_data_source.dart';
-import 'package:ditonton_tv/data/datasources/tv_remote_data_source.dart';
 import 'package:ditonton_core/data/models/tv_table.dart';
 import 'package:ditonton_core/domain/entities/season_detail.dart';
 import 'package:ditonton_core/domain/entities/tv.dart';
 import 'package:ditonton_core/domain/entities/tv_detail.dart';
+import 'package:ditonton_tv/data/datasources/tv_local_data_source.dart';
+import 'package:ditonton_tv/data/datasources/tv_remote_data_source.dart';
 import 'package:ditonton_tv/domain/repositories/tv_repository.dart';
-
 class TVRepositoryImpl implements TVRepository {
   final TVRemoteDataSource remoteDataSource;
   final TVLocalDataSource localDataSource;

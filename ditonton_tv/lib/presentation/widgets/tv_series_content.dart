@@ -1,14 +1,13 @@
 import 'package:ditonton_core/common/constants.dart';
 import 'package:ditonton_core/common/state_enum.dart';
+import 'package:ditonton_tv/presentation/bloc/tv_list_bloc.dart';
 import 'package:ditonton_tv/presentation/pages/airing_today_tvs_page.dart';
 import 'package:ditonton_tv/presentation/pages/on_the_air_tvs_page.dart';
 import 'package:ditonton_tv/presentation/pages/popular_tvs_page.dart';
 import 'package:ditonton_tv/presentation/pages/top_rated_tvs_page.dart';
-import 'package:ditonton_tv/presentation/bloc/tv_list_bloc.dart';
 import 'package:ditonton_tv/presentation/widgets/tv_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 class TVSeriesContent extends StatelessWidget {
   const TVSeriesContent({super.key});
 

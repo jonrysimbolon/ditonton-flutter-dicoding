@@ -1,22 +1,21 @@
+import 'package:ditonton/presentation/widgets/about_content.dart';
+import 'package:ditonton/presentation/widgets/watchlist_section.dart';
 import 'package:ditonton_core/common/constants.dart';
 import 'package:ditonton_core/common/state_enum.dart';
 import 'package:ditonton_core/common/utils.dart';
-import 'package:ditonton_movie/presentation/bloc/movie_list_bloc.dart';
-import 'package:ditonton_tv/presentation/bloc/tv_list_bloc.dart';
-import 'package:ditonton_movie/presentation/bloc/watchlist_movie_bloc.dart';
-import 'package:ditonton_tv/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:ditonton_core/presentation/pages/home_section.dart';
+import 'package:ditonton_movie/presentation/bloc/movie_list_bloc.dart';
+import 'package:ditonton_movie/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:ditonton_movie/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton_movie/presentation/pages/search_page.dart';
-import 'package:ditonton_tv/presentation/pages/search_tv_page.dart';
 import 'package:ditonton_movie/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/widgets/about_content.dart';
 import 'package:ditonton_movie/presentation/widgets/movie_list.dart';
+import 'package:ditonton_tv/presentation/bloc/tv_list_bloc.dart';
+import 'package:ditonton_tv/presentation/bloc/watchlist_tv_bloc.dart';
+import 'package:ditonton_tv/presentation/pages/search_tv_page.dart';
 import 'package:ditonton_tv/presentation/widgets/tv_series_content.dart';
-import 'package:ditonton/presentation/widgets/watchlist_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 class HomeMoviePage extends StatefulWidget {
   const HomeMoviePage({super.key});
 

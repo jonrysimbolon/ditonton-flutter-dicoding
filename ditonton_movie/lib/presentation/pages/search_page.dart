@@ -71,7 +71,7 @@ class _SearchPageState extends State<SearchPage> {
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
+                      itemBuilder: (_, index) {
                         final movie = state.searchResult[index];
                         return MovieCard(movie);
                       },

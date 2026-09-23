@@ -35,7 +35,7 @@ class _PopularTVsPageState extends State<PopularTVsPage> {
               return const Center(child: CircularProgressIndicator());
             } else if (state.state == RequestState.loaded) {
               return ListView.builder(
-                itemBuilder: (context, index) {
+                itemBuilder: (_, index) {
                   final tv = state.tvs[index];
                   return TVCard(tv);
                 },

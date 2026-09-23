@@ -6,6 +6,12 @@ workflows:
     environment:
       flutter: stable
     scripts:
+      - name: Resolve dependencies
+        script: |
+          flutter pub get
+          cd ditonton_core && flutter pub get && cd ..
+          cd ditonton_movie && flutter pub get && cd ..
+          cd ditonton_tv && flutter pub get && cd ..
       - name: Analyze all packages
         script: |
           flutter analyze

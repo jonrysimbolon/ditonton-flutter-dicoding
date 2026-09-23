@@ -48,7 +48,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
               return const Center(child: CircularProgressIndicator());
             } else if (state.watchlistState == RequestState.loaded) {
               return ListView.builder(
-                itemBuilder: (context, index) {
+                itemBuilder: (_, index) {
                   final movie = state.watchlistMovies[index];
                   return MovieCard(movie);
                 },
