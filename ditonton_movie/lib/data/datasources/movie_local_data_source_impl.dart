@@ -2,6 +2,7 @@ import 'package:ditonton_core/common/database_exception.dart';
 import 'package:ditonton_core/data/datasources/db/database_helper.dart';
 import 'package:ditonton_core/data/models/movie_table.dart';
 import 'package:ditonton_movie/data/datasources/movie_local_data_source.dart';
+
 class MovieLocalDataSourceImpl implements MovieLocalDataSource {
   final DatabaseHelper databaseHelper;
 

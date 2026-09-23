@@ -25,10 +25,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
       context.read<MovieDetailBloc>()
         ..add(FetchMovieDetail(widget.id))
         ..add(LoadMovieWatchlistStatus(widget.id));
-      logAnalyticsEvent('detail_view', parameters: {
-        'type': 'movie',
-        'id': widget.id,
-      });
+      logAnalyticsEvent(
+        'detail_view',
+        parameters: {'type': 'movie', 'id': widget.id},
+      );
     });
   }
 

@@ -12,6 +12,7 @@ import 'package:ditonton_tv/presentation/pages/tv_season_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 class TVDetailContent extends StatelessWidget {
   final TVDetail tv;
   final List<TV> recommendations;
@@ -160,10 +161,13 @@ class _WatchlistButton extends StatelessWidget {
       onPressed: () async {
         final messenger = ScaffoldMessenger.of(context);
         final bloc = context.read<TVDetailBloc>();
-        logAnalyticsEvent('watchlist_toggle', parameters: {
-          'action': isAddedWatchlist ? 'remove' : 'add',
-          'id': tv.id,
-        });
+        logAnalyticsEvent(
+          'watchlist_toggle',
+          parameters: {
+            'action': isAddedWatchlist ? 'remove' : 'add',
+            'id': tv.id,
+          },
+        );
         if (!isAddedWatchlist) {
           bloc.add(AddTVWatchlist(tv));
         } else {

@@ -16,6 +16,7 @@ import 'package:ditonton_tv/presentation/pages/search_tv_page.dart';
 import 'package:ditonton_tv/presentation/widgets/tv_series_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 class HomeMoviePage extends StatefulWidget {
   const HomeMoviePage({super.key});
 

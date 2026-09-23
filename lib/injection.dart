@@ -49,6 +49,7 @@ import "package:ditonton_tv/presentation/bloc/tv_search_bloc.dart";
 import "package:ditonton_tv/presentation/bloc/watchlist_tv_bloc.dart";
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
+
 final locator = GetIt.instance;
 
 void init() {

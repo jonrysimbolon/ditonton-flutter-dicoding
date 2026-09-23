@@ -47,7 +47,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'firebase_options.dart';
 
-const bool crashOnStartup = bool.fromEnvironment('CRASH_TEST', defaultValue: false);
+const bool crashOnStartup = bool.fromEnvironment(
+  'CRASH_TEST',
+  defaultValue: false,
+);
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

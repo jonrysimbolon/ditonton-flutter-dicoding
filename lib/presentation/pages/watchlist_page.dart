@@ -4,6 +4,7 @@ import 'package:ditonton_movie/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:ditonton_tv/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 class WatchlistPage extends StatefulWidget {
   static const routeName = '/watchlist';
 

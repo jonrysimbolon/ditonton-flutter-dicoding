@@ -3,6 +3,7 @@ import 'package:ditonton_core/domain/entities/season.dart';
 import 'package:ditonton_core/domain/entities/tv_detail.dart';
 import 'package:ditonton_tv/data/models/season_model.dart';
 import 'package:equatable/equatable.dart';
+
 class TVDetailModel extends Equatable {
   const TVDetailModel({
     required this.backdropPath,

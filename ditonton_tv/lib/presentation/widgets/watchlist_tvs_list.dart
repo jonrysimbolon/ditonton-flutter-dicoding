@@ -4,6 +4,7 @@ import 'package:ditonton_tv/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:ditonton_tv/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 class WatchlistTVsList extends StatelessWidget {
   const WatchlistTVsList({super.key});
 

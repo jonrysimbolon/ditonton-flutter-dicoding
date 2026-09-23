@@ -10,6 +10,7 @@ import 'package:ditonton_movie/presentation/pages/movie_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 class MovieDetailContent extends StatelessWidget {
   final MovieDetail movie;
   final List<Movie> recommendations;
@@ -155,10 +156,13 @@ class _WatchlistButton extends StatelessWidget {
       onPressed: () async {
         final messenger = ScaffoldMessenger.of(context);
         final bloc = context.read<MovieDetailBloc>();
-        logAnalyticsEvent('watchlist_toggle', parameters: {
-          'action': isAddedWatchlist ? 'remove' : 'add',
-          'id': movie.id,
-        });
+        logAnalyticsEvent(
+          'watchlist_toggle',
+          parameters: {
+            'action': isAddedWatchlist ? 'remove' : 'add',
+            'id': movie.id,
+          },
+        );
         if (!isAddedWatchlist) {
           bloc.add(AddMovieWatchlist(movie));
         } else {

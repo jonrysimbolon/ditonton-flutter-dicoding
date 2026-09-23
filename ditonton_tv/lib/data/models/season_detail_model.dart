@@ -1,6 +1,7 @@
 import 'package:ditonton_core/domain/entities/season_detail.dart';
 import 'package:ditonton_tv/data/models/episode_model.dart';
 import 'package:equatable/equatable.dart';
+
 class SeasonDetailModel extends Equatable {
   const SeasonDetailModel({
     required this.airDate,

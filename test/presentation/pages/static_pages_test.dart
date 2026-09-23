@@ -167,7 +167,8 @@ void main() {
       state.didPopNext();
       await tester.pump();
 
-      verify(mockWatchlistMovieBloc.add(const FetchWatchlistMovies())).called(1);
+      verify(mockWatchlistMovieBloc.add(const FetchWatchlistMovies()))
+          .called(1);
       verify(mockWatchlistTvBloc.add(const FetchWatchlistTVs())).called(1);
     });
   });

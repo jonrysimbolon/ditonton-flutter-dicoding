@@ -272,7 +272,9 @@ void main() {
     test('event props expose their payloads', () {
       expect(const FetchMovieDetail(7).props, [7]);
       expect(const AddMovieWatchlist(testMovieDetail).props, [testMovieDetail]);
-      expect(const RemoveMovieWatchlist(testMovieDetail).props, [testMovieDetail]);
+      expect(const RemoveMovieWatchlist(testMovieDetail).props, [
+        testMovieDetail,
+      ]);
       expect(const LoadMovieWatchlistStatus(7).props, [7]);
     });
   });

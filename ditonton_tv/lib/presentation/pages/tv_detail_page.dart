@@ -26,10 +26,10 @@ class _TVDetailPageState extends State<TVDetailPage> {
       context.read<TVDetailBloc>()
         ..add(FetchTVDetail(widget.id))
         ..add(LoadTVWatchlistStatus(widget.id));
-      logAnalyticsEvent('detail_view', parameters: {
-        'type': 'tv',
-        'id': widget.id,
-      });
+      logAnalyticsEvent(
+        'detail_view',
+        parameters: {'type': 'tv', 'id': widget.id},
+      );
     });
   }
 
