@@ -67,7 +67,7 @@ void main() {
     test('should change state to loading when usecase is called', () async {
       when(mockSearchMovies.execute(tQuery))
           .thenAnswer((_) async => Right(tMovieList));
-      bloc.add(FetchMovieSearch(tQuery));
+      bloc.add(const FetchMovieSearch(tQuery));
       final state = await waitForLast(
         (state) => state.state == RequestState.loading,
       );
@@ -79,7 +79,7 @@ void main() {
       () async {
         when(mockSearchMovies.execute(tQuery))
             .thenAnswer((_) async => Right(tMovieList));
-        bloc.add(FetchMovieSearch(tQuery));
+        bloc.add(const FetchMovieSearch(tQuery));
         await waitForLast((state) => state.state == RequestState.loaded);
         expect(bloc.state.state, RequestState.loaded);
         expect(bloc.state.searchResult, tMovieList);
@@ -90,7 +90,7 @@ void main() {
     test('should return error when data is unsuccessful', () async {
       when(mockSearchMovies.execute(tQuery))
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
-      bloc.add(FetchMovieSearch(tQuery));
+      bloc.add(const FetchMovieSearch(tQuery));
       await waitForLast((state) => state.state == RequestState.error);
       expect(bloc.state.state, RequestState.error);
       expect(bloc.state.message, 'Server Failure');

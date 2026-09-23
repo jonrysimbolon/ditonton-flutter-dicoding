@@ -211,7 +211,7 @@ void main() {
 
     test('should change to Loaded on success', () async {
       when(mockUsecase.execute('test')).thenAnswer((_) async => Right(tTvList));
-      bloc.add(FetchTVSearch('test'));
+      bloc.add(const FetchTVSearch('test'));
       await waitForLast(bloc.stream, (s) => s.state == RequestState.loaded);
       expect(bloc.state.state, RequestState.loaded);
       expect(bloc.state.searchResult, tTvList);
@@ -220,7 +220,7 @@ void main() {
     test('should change to Error on failure', () async {
       when(mockUsecase.execute('test'))
           .thenAnswer((_) async => const Left(ServerFailure('Failed')));
-      bloc.add(FetchTVSearch('test'));
+      bloc.add(const FetchTVSearch('test'));
       await waitForLast(bloc.stream, (s) => s.state == RequestState.error);
       expect(bloc.state.state, RequestState.error);
       expect(bloc.state.message, 'Failed');

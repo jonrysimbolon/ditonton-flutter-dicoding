@@ -106,7 +106,7 @@ void main() {
   group('Get Movie Detail', () {
     test('should get data from the usecase', () async {
       arrangeUsecase();
-      bloc.add(FetchMovieDetail(tId));
+      bloc.add(const FetchMovieDetail(tId));
       await waitForLast((state) => state.movieState == RequestState.loaded);
       verify(mockGetMovieDetail.execute(tId));
       verify(mockGetMovieRecommendations.execute(tId));
@@ -114,7 +114,7 @@ void main() {
 
     test('should change state to Loading when usecase is called', () async {
       arrangeUsecase();
-      bloc.add(FetchMovieDetail(tId));
+      bloc.add(const FetchMovieDetail(tId));
       final state = await waitForLast(
         (state) => state.movieState == RequestState.loading,
       );
@@ -123,7 +123,7 @@ void main() {
 
     test('should change movie when data is gotten successfully', () async {
       arrangeUsecase();
-      bloc.add(FetchMovieDetail(tId));
+      bloc.add(const FetchMovieDetail(tId));
       await waitForLast((state) => state.movieState == RequestState.loaded);
       expect(bloc.state.movieState, RequestState.loaded);
       expect(bloc.state.movie, testMovieDetail);
@@ -134,7 +134,7 @@ void main() {
       'should change recommendation movies when data is gotten successfully',
       () async {
         arrangeUsecase();
-        bloc.add(FetchMovieDetail(tId));
+        bloc.add(const FetchMovieDetail(tId));
         await waitForLast((state) => state.movieState == RequestState.loaded);
         expect(bloc.state.movieState, RequestState.loaded);
         expect(bloc.state.movieRecommendations, tMovies);
@@ -145,7 +145,7 @@ void main() {
   group('Get Movie Recommendations', () {
     test('should get data from the usecase', () async {
       arrangeUsecase();
-      bloc.add(FetchMovieDetail(tId));
+      bloc.add(const FetchMovieDetail(tId));
       await waitForLast((state) => state.movieState == RequestState.loaded);
       verify(mockGetMovieRecommendations.execute(tId));
       expect(bloc.state.movieRecommendations, tMovies);
@@ -155,7 +155,7 @@ void main() {
       'should update recommendation state when data is gotten successfully',
       () async {
         arrangeUsecase();
-        bloc.add(FetchMovieDetail(tId));
+        bloc.add(const FetchMovieDetail(tId));
         await waitForLast((state) => state.movieState == RequestState.loaded);
         expect(bloc.state.recommendationState, RequestState.loaded);
         expect(bloc.state.movieRecommendations, tMovies);
@@ -167,7 +167,7 @@ void main() {
           .thenAnswer((_) async => const Right(testMovieDetail));
       when(mockGetMovieRecommendations.execute(tId))
           .thenAnswer((_) async => const Left(ServerFailure('Failed')));
-      bloc.add(FetchMovieDetail(tId));
+      bloc.add(const FetchMovieDetail(tId));
       await waitForLast((state) => state.movieState == RequestState.loaded);
       expect(bloc.state.recommendationState, RequestState.error);
       expect(bloc.state.message, 'Failed');
@@ -177,7 +177,7 @@ void main() {
   group('Watchlist', () {
     test('should get the watchlist status', () async {
       when(mockGetWatchlistStatus.execute(1)).thenAnswer((_) async => true);
-      bloc.add(LoadMovieWatchlistStatus(1));
+      bloc.add(const LoadMovieWatchlistStatus(1));
       await waitForLast((state) => state.isAddedToWatchlist == true);
       expect(bloc.state.isAddedToWatchlist, true);
     });
@@ -187,7 +187,7 @@ void main() {
           .thenAnswer((_) async => const Right('Success'));
       when(mockGetWatchlistStatus.execute(testMovieDetail.id))
           .thenAnswer((_) async => true);
-      bloc.add(AddMovieWatchlist(testMovieDetail));
+      bloc.add(const AddMovieWatchlist(testMovieDetail));
       await waitForLast(
         (state) =>
             state.isAddedToWatchlist == true &&
@@ -201,7 +201,7 @@ void main() {
           .thenAnswer((_) async => const Right('Removed'));
       when(mockGetWatchlistStatus.execute(testMovieDetail.id))
           .thenAnswer((_) async => false);
-      bloc.add(RemoveMovieWatchlist(testMovieDetail));
+      bloc.add(const RemoveMovieWatchlist(testMovieDetail));
       await waitForLast(
         (state) =>
             state.isAddedToWatchlist == false &&
@@ -215,7 +215,7 @@ void main() {
           .thenAnswer((_) async => const Right('Added to Watchlist'));
       when(mockGetWatchlistStatus.execute(testMovieDetail.id))
           .thenAnswer((_) async => true);
-      bloc.add(AddMovieWatchlist(testMovieDetail));
+      bloc.add(const AddMovieWatchlist(testMovieDetail));
       await waitForLast(
         (state) =>
             state.isAddedToWatchlist == true &&
@@ -233,7 +233,7 @@ void main() {
           .thenAnswer((_) async => const Left(DatabaseFailure('Failed')));
       when(mockGetWatchlistStatus.execute(testMovieDetail.id))
           .thenAnswer((_) async => false);
-      bloc.add(AddMovieWatchlist(testMovieDetail));
+      bloc.add(const AddMovieWatchlist(testMovieDetail));
       await waitForLast((state) => state.watchlistMessage == 'Failed');
       expect(bloc.state.watchlistMessage, 'Failed');
       expect(emissions.length, 1);
@@ -246,7 +246,7 @@ void main() {
             .thenAnswer((_) async => const Left(DatabaseFailure('Failed')));
         when(mockGetWatchlistStatus.execute(testMovieDetail.id))
             .thenAnswer((_) async => true);
-        bloc.add(RemoveMovieWatchlist(testMovieDetail));
+        bloc.add(const RemoveMovieWatchlist(testMovieDetail));
         await waitForEmissions(2);
         expect(bloc.state.watchlistMessage, 'Failed');
         expect(emissions.length, 2);
@@ -260,7 +260,7 @@ void main() {
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       when(mockGetMovieRecommendations.execute(tId))
           .thenAnswer((_) async => Right(tMovies));
-      bloc.add(FetchMovieDetail(tId));
+      bloc.add(const FetchMovieDetail(tId));
       await waitForLast((state) => state.movieState == RequestState.error);
       expect(bloc.state.movieState, RequestState.error);
       expect(bloc.state.message, 'Server Failure');

@@ -90,7 +90,7 @@ void main() {
 
     await tester.tap(watchlistButton);
 
-    final messageState = MovieDetailState(
+    const messageState = MovieDetailState(
       movieState: RequestState.loaded,
       movie: testMovieDetail,
       recommendationState: RequestState.loaded,
@@ -100,7 +100,7 @@ void main() {
     streamController.add(messageState);
     await tester.pump();
 
-    verify(mockBloc.add(AddMovieWatchlist(testMovieDetail))).called(1);
+    verify(mockBloc.add(const AddMovieWatchlist(testMovieDetail))).called(1);
     expect(find.byType(SnackBar), findsOneWidget);
     expect(
       find.text(MovieDetailState.watchlistAddSuccessMessage),
@@ -121,7 +121,7 @@ void main() {
 
       await tester.tap(watchlistButton);
 
-      final messageState = MovieDetailState(
+      const messageState = MovieDetailState(
         movieState: RequestState.loaded,
         movie: testMovieDetail,
         recommendationState: RequestState.loaded,
@@ -178,7 +178,7 @@ void main() {
     WidgetTester tester,
   ) async {
     when(mockBloc.state).thenReturn(
-      MovieDetailState(
+      const MovieDetailState(
         movieState: RequestState.loaded,
         movie: testMovieDetail,
         recommendationState: RequestState.error,
@@ -232,7 +232,7 @@ void main() {
 
     await tester.tap(find.byType(ElevatedButton));
 
-    final messageState = MovieDetailState(
+    const messageState = MovieDetailState(
       movieState: RequestState.loaded,
       movie: testMovieDetail,
       recommendationState: RequestState.loaded,
@@ -243,7 +243,7 @@ void main() {
     streamController.add(messageState);
     await tester.pump();
 
-    verify(mockBloc.add(RemoveMovieWatchlist(testMovieDetail))).called(1);
+    verify(mockBloc.add(const RemoveMovieWatchlist(testMovieDetail))).called(1);
     expect(find.byType(SnackBar), findsOneWidget);
     expect(
       find.text(MovieDetailState.watchlistRemoveSuccessMessage),
@@ -279,7 +279,7 @@ void main() {
       voteCount: 1,
     );
     when(mockBloc.state).thenReturn(
-      MovieDetailState(
+      const MovieDetailState(
         movieState: RequestState.loaded,
         movie: shortMovie,
         recommendationState: RequestState.loaded,

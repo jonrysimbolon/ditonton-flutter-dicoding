@@ -31,8 +31,8 @@ void main() {
 
   group('SearchPage debounce', () {
     test('events support value equality', () {
-      expect(MovieSearchEvent(), MovieSearchEvent());
-      expect(FetchMovieSearch('a'), FetchMovieSearch('a'));
+      expect(const MovieSearchEvent(), const MovieSearchEvent());
+      expect(const FetchMovieSearch('a'), const FetchMovieSearch('a'));
     });
     Widget makeTestable() {
       return BlocProvider<MovieSearchBloc>.value(

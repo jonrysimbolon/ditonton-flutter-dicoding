@@ -31,7 +31,7 @@ void main() {
 
   group('SearchTVPage debounce', () {
     test('events support value equality', () {
-      expect(TVSearchEvent(), TVSearchEvent());
+      expect(const TVSearchEvent(), const TVSearchEvent());
     });
     Widget makeTestable() {
       return BlocProvider<TVSearchBloc>.value(

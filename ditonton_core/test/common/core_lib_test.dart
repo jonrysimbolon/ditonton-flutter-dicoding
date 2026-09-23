@@ -87,10 +87,10 @@ void main() {
   });
 
   group('GenreModel', () {
-    final model = GenreModel(id: 1, name: 'Action');
+    const model = GenreModel(id: 1, name: 'Action');
 
     test('fromJson', () {
-      expect(GenreModel.fromJson({'id': 1, 'name': 'Action'}), model);
+      expect(GenreModel.fromJson(const {'id': 1, 'name': 'Action'}), model);
     });
 
     test('toJson', () {
@@ -103,7 +103,7 @@ void main() {
   });
 
   group('MovieTable', () {
-    final movie = Movie(
+    const movie = Movie(
       adult: null,
       backdropPath: null,
       genreIds: null,
@@ -119,7 +119,7 @@ void main() {
       voteCount: null,
     );
 
-    final detail = MovieDetail(
+    const detail = MovieDetail(
       adult: false,
       backdropPath: null,
       genres: [],
@@ -143,7 +143,7 @@ void main() {
     });
 
     test('fromMap', () {
-      final table = MovieTable.fromMap({
+      final table = MovieTable.fromMap(const {
         'id': 1,
         'title': 'title',
         'posterPath': '/poster',
@@ -151,7 +151,7 @@ void main() {
       });
       expect(
         table,
-        MovieTable(
+        const MovieTable(
           id: 1,
           title: 'title',
           posterPath: '/poster',
@@ -187,7 +187,7 @@ void main() {
   });
 
   group('TVTable', () {
-    final tv = TV(
+    const tv = TV(
       backdropPath: null,
       firstAirDate: null,
       genreIds: null,
@@ -202,7 +202,7 @@ void main() {
       voteCount: null,
     );
 
-    final detail = TVDetail(
+    const detail = TVDetail(
       backdropPath: null,
       firstAirDate: '2023-01-01',
       genres: [],
@@ -231,7 +231,7 @@ void main() {
     });
 
     test('fromMap', () {
-      final table = TVTable.fromMap({
+      final table = TVTable.fromMap(const {
         'id': 1,
         'name': 'name',
         'posterPath': '/poster',
@@ -239,7 +239,7 @@ void main() {
       });
       expect(
         table,
-        TVTable(
+        const TVTable(
           id: 1,
           name: 'name',
           posterPath: '/poster',
@@ -275,8 +275,8 @@ void main() {
   });
 
   group('entities', () {
-    final genre = Genre(id: 1, name: 'Action');
-    final movieDetail = MovieDetail(
+    const genre = Genre(id: 1, name: 'Action');
+    const movieDetail = MovieDetail(
       adult: false,
       backdropPath: '/backdrop',
       genres: [genre],
@@ -290,7 +290,7 @@ void main() {
       voteAverage: 7,
       voteCount: 100,
     );
-    final season = Season(
+    const season = Season(
       airDate: '2023-01-01',
       episodeCount: 10,
       id: 1,
@@ -300,7 +300,7 @@ void main() {
       seasonNumber: 1,
       voteAverage: 7,
     );
-    final episode = Episode(
+    const episode = Episode(
       airDate: '2023-01-01',
       episodeNumber: 1,
       id: 1,
@@ -312,7 +312,7 @@ void main() {
       voteAverage: 7,
       voteCount: 100,
     );
-    final seasonDetail = SeasonDetail(
+    const seasonDetail = SeasonDetail(
       airDate: '2023-01-01',
       episodes: [episode],
       id: 1,
@@ -321,7 +321,7 @@ void main() {
       posterPath: '/poster',
       seasonNumber: 1,
     );
-    final tvDetail = TVDetail(
+    const tvDetail = TVDetail(
       backdropPath: '/backdrop',
       firstAirDate: '2023-01-01',
       genres: [genre],
@@ -342,7 +342,7 @@ void main() {
     );
 
     test('movie entity equality', () {
-      final watchlistMovie = Movie.watchlist(
+      const watchlistMovie = Movie.watchlist(
         id: 1,
         overview: 'overview',
         posterPath: '/poster',
@@ -364,7 +364,7 @@ void main() {
       expect(tvDetail.seasons, [season]);
       expect(seasonDetail.episodes.first.id, episode.id);
       expect(episode.name, 'episode');
-      final watchlistTv = TV.watchlist(
+      const watchlistTv = TV.watchlist(
         id: 1,
         overview: 'overview',
         posterPath: '/poster',

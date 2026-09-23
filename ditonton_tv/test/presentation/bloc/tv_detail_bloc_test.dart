@@ -130,7 +130,7 @@ void main() {
           .thenAnswer((_) async => const Right(testTvDetail));
       when(mockGetTvRecommendations.execute(tId))
           .thenAnswer((_) async => Right(testTvList));
-      bloc.add(FetchTVDetail(tId));
+      bloc.add(const FetchTVDetail(tId));
       final state = await waitForLast(
         (state) => state.tvState == RequestState.loading,
       );
@@ -142,7 +142,7 @@ void main() {
           .thenAnswer((_) async => const Right(testTvDetail));
       when(mockGetTvRecommendations.execute(tId))
           .thenAnswer((_) async => Right(testTvList));
-      bloc.add(FetchTVDetail(tId));
+      bloc.add(const FetchTVDetail(tId));
       await waitForLast((state) => state.tvState == RequestState.loaded);
       expect(bloc.state.tvState, RequestState.loaded);
       expect(bloc.state.tv, testTvDetail);
@@ -157,7 +157,7 @@ void main() {
             .thenAnswer((_) async => const Right(testTvDetail));
         when(mockGetTvRecommendations.execute(tId))
             .thenAnswer((_) async => const Left(ServerFailure('Failed')));
-        bloc.add(FetchTVDetail(tId));
+        bloc.add(const FetchTVDetail(tId));
         await waitForLast((state) => state.tvState == RequestState.loaded);
         expect(bloc.state.tvState, RequestState.loaded);
         expect(bloc.state.recommendationState, RequestState.error);
@@ -169,7 +169,7 @@ void main() {
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       when(mockGetTvRecommendations.execute(tId))
           .thenAnswer((_) async => Right(tTvs));
-      bloc.add(FetchTVDetail(tId));
+      bloc.add(const FetchTVDetail(tId));
       await waitForLast((state) => state.tvState == RequestState.error);
       expect(bloc.state.tvState, RequestState.error);
       expect(bloc.state.message, 'Server Failure');
@@ -181,7 +181,7 @@ void main() {
     test('should change season detail to loaded on success', () async {
       when(mockGetSeasonDetail.execute(tId, 1))
           .thenAnswer((_) async => const Right(testSeasonDetail));
-      bloc.add(FetchSeasonDetail(tId, 1));
+      bloc.add(const FetchSeasonDetail(tId, 1));
       await waitForLast(
         (state) => state.seasonDetailState == RequestState.loaded,
       );
@@ -192,7 +192,7 @@ void main() {
     test('should change season detail to error on failure', () async {
       when(mockGetSeasonDetail.execute(tId, 1))
           .thenAnswer((_) async => const Left(ServerFailure('Failed')));
-      bloc.add(FetchSeasonDetail(tId, 1));
+      bloc.add(const FetchSeasonDetail(tId, 1));
       await waitForLast(
         (state) => state.seasonDetailState == RequestState.error,
       );
@@ -204,7 +204,7 @@ void main() {
   group('watchlist', () {
     test('should get the watchlist status', () async {
       when(mockGetWatchlistTvStatus.execute(1)).thenAnswer((_) async => true);
-      bloc.add(LoadTVWatchlistStatus(1));
+      bloc.add(const LoadTVWatchlistStatus(1));
       await waitForLast((state) => state.isAddedToWatchlist == true);
       expect(bloc.state.isAddedToWatchlist, true);
     });
@@ -214,7 +214,7 @@ void main() {
           .thenAnswer((_) async => const Right('Added to Watchlist'));
       when(mockGetWatchlistTvStatus.execute(tTvDetail.id))
           .thenAnswer((_) async => true);
-      bloc.add(AddTVWatchlist(tTvDetail));
+      bloc.add(const AddTVWatchlist(tTvDetail));
       await waitForLast(
         (state) =>
             state.watchlistMessage == 'Added to Watchlist' &&
@@ -229,7 +229,7 @@ void main() {
           .thenAnswer((_) async => const Left(DatabaseFailure('Failed')));
       when(mockGetWatchlistTvStatus.execute(tTvDetail.id))
           .thenAnswer((_) async => false);
-      bloc.add(AddTVWatchlist(tTvDetail));
+      bloc.add(const AddTVWatchlist(tTvDetail));
       await waitForLast((state) => state.watchlistMessage == 'Failed');
       expect(bloc.state.watchlistMessage, 'Failed');
     });
@@ -239,7 +239,7 @@ void main() {
           .thenAnswer((_) async => const Right('Removed from Watchlist'));
       when(mockGetWatchlistTvStatus.execute(tTvDetail.id))
           .thenAnswer((_) async => false);
-      bloc.add(RemoveTVWatchlist(tTvDetail));
+      bloc.add(const RemoveTVWatchlist(tTvDetail));
       await waitForLast(
         (state) =>
             state.watchlistMessage == 'Removed from Watchlist' &&
@@ -254,7 +254,7 @@ void main() {
           .thenAnswer((_) async => const Left(DatabaseFailure('Failed')));
       when(mockGetWatchlistTvStatus.execute(tTvDetail.id))
           .thenAnswer((_) async => true);
-      bloc.add(RemoveTVWatchlist(tTvDetail));
+      bloc.add(const RemoveTVWatchlist(tTvDetail));
       await waitForLast((state) => state.watchlistMessage == 'Failed');
       expect(bloc.state.watchlistMessage, 'Failed');
     });

@@ -91,7 +91,7 @@ void main() {
 
       await tester.tap(watchlistButton);
 
-      final messageState = TVDetailState(
+      const messageState = TVDetailState(
         tvState: RequestState.loaded,
         tv: testTvDetail,
         recommendationState: RequestState.loaded,
@@ -101,7 +101,7 @@ void main() {
       streamController.add(messageState);
       await tester.pump();
 
-      verify(mockBloc.add(AddTVWatchlist(testTvDetail))).called(1);
+      verify(mockBloc.add(const AddTVWatchlist(testTvDetail))).called(1);
       expect(find.byType(SnackBar), findsOneWidget);
       expect(
         find.text(TVDetailState.watchlistAddSuccessMessage),
@@ -124,7 +124,7 @@ void main() {
 
       await tester.tap(watchlistButton);
 
-      final messageState = TVDetailState(
+      const messageState = TVDetailState(
         tvState: RequestState.loaded,
         tv: testTvDetail,
         recommendationState: RequestState.loaded,
@@ -180,7 +180,7 @@ void main() {
     WidgetTester tester,
   ) async {
     when(mockBloc.state).thenReturn(
-      TVDetailState(
+      const TVDetailState(
         tvState: RequestState.loaded,
         tv: testTvDetail,
         recommendationState: RequestState.error,
@@ -263,7 +263,7 @@ void main() {
 
     await tester.tap(find.byType(FilledButton));
 
-    final messageState = TVDetailState(
+    const messageState = TVDetailState(
       tvState: RequestState.loaded,
       tv: testTvDetail,
       recommendationState: RequestState.loaded,
@@ -274,7 +274,7 @@ void main() {
     streamController.add(messageState);
     await tester.pump();
 
-    verify(mockBloc.add(RemoveTVWatchlist(testTvDetail))).called(1);
+    verify(mockBloc.add(const RemoveTVWatchlist(testTvDetail))).called(1);
     expect(find.byType(SnackBar), findsOneWidget);
     expect(
       find.text(TVDetailState.watchlistRemoveSuccessMessage),

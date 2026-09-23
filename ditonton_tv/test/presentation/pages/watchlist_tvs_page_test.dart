@@ -18,7 +18,7 @@ import 'watchlist_tvs_page_test.mocks.dart';
 void main() {
   group('WatchlistTVsPage', () {
     test('events support value equality', () {
-      expect(WatchlistTVEvent(), WatchlistTVEvent());
+      expect(const WatchlistTVEvent(), const WatchlistTVEvent());
     });
     late MockWatchlistTVBloc mockBloc;
     late StreamController<WatchlistTVState> streamController;

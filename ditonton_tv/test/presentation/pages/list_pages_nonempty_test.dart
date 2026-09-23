@@ -54,10 +54,10 @@ void main() {
     testWidgets('popular events support equality', (tester) async {
       expect(FetchPopularTVs(), FetchPopularTVs());
       expect(FetchPopularTVs().props, isEmpty);
-      expect(FetchAiringTodayTvsList().props, isEmpty);
-      expect(AiringTodayTVsEvent(), AiringTodayTVsEvent());
-      expect(OnTheAirTVsEvent(), OnTheAirTVsEvent());
-      expect(TopRatedTVsEvent(), TopRatedTVsEvent());
+      expect(const FetchAiringTodayTvsList().props, isEmpty);
+      expect(const AiringTodayTVsEvent(), const AiringTodayTVsEvent());
+      expect(const OnTheAirTVsEvent(), const OnTheAirTVsEvent());
+      expect(const TopRatedTVsEvent(), const TopRatedTVsEvent());
     });
 
     testWidgets('TopRatedTVsPage shows cards', (tester) async {
