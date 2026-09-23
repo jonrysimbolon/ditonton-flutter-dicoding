@@ -1,0 +1,24 @@
+name: ditonton_core
+description: Shared core package for the Ditonton app (common, entities, database helper, generic widgets).
+version: 1.0.0
+publish_to: 'none'
+
+environment:
+  sdk: ">=3.13.3 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  equatable: ^2.0.5
+  google_fonts: ^6.2.1
+  sqflite: ^2.3.3+1
+  crypto: ^3.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  sqflite_common_ffi: ^2.4.3
+
+flutter:
+  uses-material-design: true

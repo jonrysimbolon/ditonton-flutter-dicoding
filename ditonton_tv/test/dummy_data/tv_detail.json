@@ -1,0 +1,46 @@
+{
+  "backdrop_path": "/backdrop_detail.jpg",
+  "first_air_date": "2021-01-01",
+  "genres": [
+    {"id": 18, "name": "Drama"},
+    {"id": 80, "name": "Crime"}
+  ],
+  "id": 1,
+  "last_air_date": "2023-01-01",
+  "name": "Test TV Detail",
+  "number_of_episodes": 20,
+  "number_of_seasons": 2,
+  "origin_country": ["US"],
+  "original_language": "en",
+  "original_name": "Test TV Detail",
+  "overview": "Detailed overview of test tv series.",
+  "popularity": 150.0,
+  "poster_path": "/poster_detail.jpg",
+  "seasons": [
+    {
+      "air_date": "2021-01-01",
+      "episode_count": 10,
+      "id": 1001,
+      "name": "Season 1",
+      "overview": "Season 1 overview.",
+      "poster_path": "/season1.jpg",
+      "season_number": 1,
+      "vote_average": 8.0
+    },
+    {
+      "air_date": "2022-01-01",
+      "episode_count": 10,
+      "id": 1002,
+      "name": "Season 2",
+      "overview": "Season 2 overview.",
+      "poster_path": "/season2.jpg",
+      "season_number": 2,
+      "vote_average": 8.5
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "Test tagline",
+  "type": "Scripted",
+  "vote_average": 8.7,
+  "vote_count": 1500
+}

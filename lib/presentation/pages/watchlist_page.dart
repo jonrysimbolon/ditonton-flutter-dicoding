@@ -1,9 +1,9 @@
-import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_tv_notifier.dart';
+import 'package:ditonton_core/common/utils.dart';
+import 'package:ditonton_movie/presentation/bloc/watchlist_movie_bloc.dart';
+import 'package:ditonton_tv/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:ditonton/presentation/widgets/watchlist_section.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WatchlistPage extends StatefulWidget {
   static const routeName = '/watchlist';
@@ -20,14 +20,8 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
     super.initState();
     Future.microtask(() {
       if (!mounted) return;
-      Provider.of<WatchlistMovieNotifier>(
-        context,
-        listen: false,
-      ).fetchWatchlistMovies();
-      Provider.of<WatchlistTVNotifier>(
-        context,
-        listen: false,
-      ).fetchWatchlistTvs();
+      context.read<WatchlistMovieBloc>().add(const FetchWatchlistMovies());
+      context.read<WatchlistTVBloc>().add(const FetchWatchlistTVs());
     });
   }
 
@@ -39,14 +33,8 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
 
   @override
   void didPopNext() {
-    Provider.of<WatchlistMovieNotifier>(
-      context,
-      listen: false,
-    ).fetchWatchlistMovies();
-    Provider.of<WatchlistTVNotifier>(
-      context,
-      listen: false,
-    ).fetchWatchlistTvs();
+    context.read<WatchlistMovieBloc>().add(const FetchWatchlistMovies());
+    context.read<WatchlistTVBloc>().add(const FetchWatchlistTVs());
   }
 
   @override

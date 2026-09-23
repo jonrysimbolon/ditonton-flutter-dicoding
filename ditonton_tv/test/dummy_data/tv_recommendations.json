@@ -1,0 +1,22 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "backdrop_path": "/backdrop_rec.jpg",
+      "first_air_date": "2022-06-01",
+      "genre_ids": [18],
+      "id": 200,
+      "name": "Recommended TV",
+      "origin_country": ["US"],
+      "original_language": "en",
+      "original_name": "Recommended TV",
+      "overview": "Recommended overview.",
+      "popularity": 120.0,
+      "poster_path": "/poster_rec.jpg",
+      "vote_average": 8.2,
+      "vote_count": 700
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 1
+}

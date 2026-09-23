@@ -1,0 +1,22 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "backdrop_path": "/backdrop_top.jpg",
+      "first_air_date": "2020-01-01",
+      "genre_ids": [18, 80],
+      "id": 130,
+      "name": "Top Rated TV",
+      "origin_country": ["US"],
+      "original_language": "en",
+      "original_name": "Top Rated TV",
+      "overview": "Top rated tv overview.",
+      "popularity": 300.0,
+      "poster_path": "/poster_top.jpg",
+      "vote_average": 9.5,
+      "vote_count": 5000
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 1
+}

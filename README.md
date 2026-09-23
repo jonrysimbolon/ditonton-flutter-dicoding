@@ -4,8 +4,8 @@ Aplikasi katalog film dan serial TV yang dibangun dengan Flutter. Proyek ini mer
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.47.5-blue)
 ![Dart](https://img.shields.io/badge/Dart-3.13.4-blue)
-![Coverage](https://img.shields.io/badge/coverage-98.02%25-brightgreen)
-![Tests](https://img.shields.io/badge/tests-324%20passed-success)
+![Coverage](https://img.shields.io/badge/coverage-97.64%25-brightgreen)
+![Tests](https://img.shields.io/badge/tests-365%20passed-success)
 
 ## Fitur
 
@@ -18,23 +18,38 @@ Aplikasi katalog film dan serial TV yang dibangun dengan Flutter. Proyek ini mer
 
 ## Arsitektur & Teknologi
 
-- **Clean Architecture** dengan pemisahan lapisan `data`, `domain`, dan `presentation`.
-- **Provider** untuk state management.
+- **Modularisasi** — aplikasi dibagi menjadi modul `ditonton_core`, `ditonton_movie`, dan `ditonton_tv`.
+- **Clean Architecture** dengan pemisahan lapisan `data`, `domain`, dan `presentation` di setiap modul.
+- **BLoC** untuk state management.
 - **Dartz** (`Either`) untuk penanganan error tanpa exception.
 - **Get It** untuk dependency injection.
 - **HTTP** untuk konsumsi API [The Movie Database (TMDB)](https://www.themoviedb.org/).
 - **SQFLite** untuk penyimpanan watchlist secara lokal.
+- **SSL Pinning** sebagai lapisan keamanan tambahan saat mengakses API.
+- **Firebase Analytics & Crashlytics** untuk memantau stabilitas dan laporan eror dari pengguna.
 - **Mockito** untuk pembuatan mock pada pengujian.
 
 ## Struktur Proyek
 
 ```
-lib/
-├── common/          # Konstanta, konfigurasi, failure, dan exception
-├── data/            # Model, datasource, dan implementasi repository
-├── domain/          # Entity, repository abstract, dan use case
-├── presentation/    # Halaman, widget, dan provider
-└── main.dart        # Entry point aplikasi
+a199-flutter-expert-project/
+├── lib/              # Entry point aplikasi (package utama: ditonton)
+├── ditonton_core/    # Modul core: entity, model, database, konfigurasi, SSL pinning
+├── ditonton_movie/   # Modul fitur film
+├── ditonton_tv/      # Modul fitur serial TV
+├── integration_test/ # Pengujian integrasi
+└── codemagic.yaml    # Konfigurasi CI (Codemagic)
+```
+
+Struktur internal tiap modul mengikuti Clean Architecture:
+
+```
+modul/
+├── lib/
+│   ├── data/         # Model, datasource, implementasi repository
+│   ├── domain/       # Entity, repository abstract, use case
+│   └── presentation/ # Halaman, widget, dan bloc
+└── test/
 ```
 
 ## Menjalankan Aplikasi
@@ -46,7 +61,7 @@ flutter run
 
 ## Pengujian
 
-Proyek ini memiliki 324 pengujian unit dan widget dengan cakupan kode 98.02%.
+Proyek ini memiliki 365 pengujian unit dan widget dengan cakupan kode 97.64%.
 
 ```
 flutter test

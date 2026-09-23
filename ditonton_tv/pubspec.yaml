@@ -1,0 +1,29 @@
+name: ditonton_tv
+description: TV series feature package for the Ditonton app.
+version: 1.0.0
+publish_to: 'none'
+
+environment:
+  sdk: ">=3.13.3 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  ditonton_core:
+    path: ../ditonton_core
+  http: ^1.2.2
+  dartz: ^0.10.1
+  equatable: ^2.0.5
+  flutter_bloc: ^9.1.1
+  cached_network_image: ^3.4.1
+  flutter_rating_bar: ^4.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  mockito: ^5.0.8
+  build_runner: ^2.0.4
+
+flutter:
+  uses-material-design: true

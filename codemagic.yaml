@@ -1,0 +1,20 @@
+workflows:
+  ditonton-ci:
+    name: Ditonton CI
+    instance_type: mac_mini_m1
+    max_build_duration: 60
+    environment:
+      flutter: stable
+    scripts:
+      - name: Analyze all packages
+        script: |
+          flutter analyze
+          cd ditonton_core && flutter analyze && cd ..
+          cd ditonton_movie && flutter analyze && cd ..
+          cd ditonton_tv && flutter analyze && cd ..
+      - name: Test all packages
+        script: |
+          cd ditonton_core && flutter test && cd ..
+          cd ditonton_movie && flutter test && cd ..
+          cd ditonton_tv && flutter test && cd ..
+          flutter test

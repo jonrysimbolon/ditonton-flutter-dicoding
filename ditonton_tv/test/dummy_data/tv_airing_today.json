@@ -1,0 +1,37 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "backdrop_path": "/backdrop1.jpg",
+      "first_air_date": "2023-01-01",
+      "genre_ids": [18, 80],
+      "id": 100,
+      "name": "Test TV Airing Today",
+      "origin_country": ["US"],
+      "original_language": "en",
+      "original_name": "Test TV Airing Today",
+      "overview": "Overview airing today tv series for testing.",
+      "popularity": 100.5,
+      "poster_path": "/poster1.jpg",
+      "vote_average": 8.5,
+      "vote_count": 1000
+    },
+    {
+      "backdrop_path": "/backdrop2.jpg",
+      "first_air_date": "2023-02-01",
+      "genre_ids": [35],
+      "id": 101,
+      "name": "Second TV",
+      "origin_country": ["GB"],
+      "original_language": "en",
+      "original_name": "Second TV",
+      "overview": "Second overview.",
+      "popularity": 80.0,
+      "poster_path": "/poster2.jpg",
+      "vote_average": 7.5,
+      "vote_count": 500
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 2
+}

@@ -1,5 +1,5 @@
-import 'package:ditonton/presentation/widgets/watchlist_movies_list.dart';
-import 'package:ditonton/presentation/widgets/watchlist_tvs_list.dart';
+import 'package:ditonton_movie/presentation/widgets/watchlist_movies_list.dart';
+import 'package:ditonton_tv/presentation/widgets/watchlist_tvs_list.dart';
 import 'package:flutter/material.dart';
 
 class WatchlistSection extends StatelessWidget {

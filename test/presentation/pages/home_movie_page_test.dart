@@ -1,77 +1,92 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/common/utils.dart';
+import 'dart:async';
+
+import 'package:ditonton_core/common/state_enum.dart';
+import 'package:ditonton_core/common/utils.dart';
+import 'package:ditonton_movie/presentation/bloc/movie_list_bloc.dart';
+import 'package:ditonton_tv/presentation/bloc/tv_list_bloc.dart';
+import 'package:ditonton_movie/presentation/bloc/watchlist_movie_bloc.dart';
+import 'package:ditonton_tv/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_tv_notifier.dart';
-import 'package:ditonton/presentation/widgets/movie_list.dart';
+import 'package:ditonton_movie/presentation/widgets/movie_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
 
 import '../../dummy_data/dummy_objects.dart';
 import 'home_movie_page_test.mocks.dart';
 
-@GenerateMocks([
-  MovieListNotifier,
-  TVListNotifier,
-  WatchlistMovieNotifier,
-  WatchlistTVNotifier,
-])
+@GenerateMocks([MovieListBloc, TVListBloc, WatchlistMovieBloc, WatchlistTVBloc])
 void main() {
-  late MockMovieListNotifier mockMovieListNotifier;
-  late MockTVListNotifier mockTvListNotifier;
-  late MockWatchlistMovieNotifier mockWatchlistMovieNotifier;
-  late MockWatchlistTVNotifier mockWatchlistTvNotifier;
+  late MockMovieListBloc mockMovieListBloc;
+  late MockTVListBloc mockTvListBloc;
+  late MockWatchlistMovieBloc mockWatchlistMovieBloc;
+  late MockWatchlistTVBloc mockWatchlistTvBloc;
+  late StreamController<MovieListState> movieListStreamController;
+  late StreamController<TVListState> tvListStreamController;
+  late StreamController<WatchlistMovieState> watchlistMovieStreamController;
+  late StreamController<WatchlistTVState> watchlistTvStreamController;
 
   setUp(() {
-    mockMovieListNotifier = MockMovieListNotifier();
-    mockTvListNotifier = MockTVListNotifier();
-    mockWatchlistMovieNotifier = MockWatchlistMovieNotifier();
-    mockWatchlistTvNotifier = MockWatchlistTVNotifier();
+    mockMovieListBloc = MockMovieListBloc();
+    mockTvListBloc = MockTVListBloc();
+    mockWatchlistMovieBloc = MockWatchlistMovieBloc();
+    mockWatchlistTvBloc = MockWatchlistTVBloc();
 
-    when(mockMovieListNotifier.nowPlayingState).thenReturn(RequestState.loaded);
-    when(mockMovieListNotifier.nowPlayingMovies).thenReturn([]);
-    when(mockMovieListNotifier.popularMoviesState)
-        .thenReturn(RequestState.loaded);
-    when(mockMovieListNotifier.popularMovies).thenReturn([]);
-    when(mockMovieListNotifier.topRatedMoviesState)
-        .thenReturn(RequestState.loaded);
-    when(mockMovieListNotifier.topRatedMovies).thenReturn([]);
+    movieListStreamController = StreamController<MovieListState>.broadcast();
+    tvListStreamController = StreamController<TVListState>.broadcast();
+    watchlistMovieStreamController =
+        StreamController<WatchlistMovieState>.broadcast();
+    watchlistTvStreamController =
+        StreamController<WatchlistTVState>.broadcast();
 
-    when(mockTvListNotifier.airingTodayState).thenReturn(RequestState.loaded);
-    when(mockTvListNotifier.airingTodayTvs).thenReturn([]);
-    when(mockTvListNotifier.onTheAirState).thenReturn(RequestState.loaded);
-    when(mockTvListNotifier.onTheAirTvs).thenReturn([]);
-    when(mockTvListNotifier.popularTvsState).thenReturn(RequestState.loaded);
-    when(mockTvListNotifier.popularTvs).thenReturn([]);
-    when(mockTvListNotifier.topRatedTvsState).thenReturn(RequestState.loaded);
-    when(mockTvListNotifier.topRatedTvs).thenReturn([]);
+    when(mockMovieListBloc.stream)
+        .thenAnswer((_) => movieListStreamController.stream);
+    when(mockTvListBloc.stream)
+        .thenAnswer((_) => tvListStreamController.stream);
+    when(mockWatchlistMovieBloc.stream)
+        .thenAnswer((_) => watchlistMovieStreamController.stream);
+    when(mockWatchlistTvBloc.stream)
+        .thenAnswer((_) => watchlistTvStreamController.stream);
 
-    when(mockWatchlistMovieNotifier.watchlistState)
-        .thenReturn(RequestState.loaded);
-    when(mockWatchlistMovieNotifier.watchlistMovies).thenReturn([]);
-    when(mockWatchlistTvNotifier.watchlistState)
-        .thenReturn(RequestState.loaded);
-    when(mockWatchlistTvNotifier.watchlistTvs).thenReturn([]);
+    when(mockMovieListBloc.state).thenReturn(
+      const MovieListState(
+        nowPlayingState: RequestState.loaded,
+        popularMoviesState: RequestState.loaded,
+        topRatedMoviesState: RequestState.loaded,
+      ),
+    );
+    when(mockTvListBloc.state).thenReturn(
+      const TVListState(
+        airingTodayState: RequestState.loaded,
+        onTheAirState: RequestState.loaded,
+        popularTvsState: RequestState.loaded,
+        topRatedTvsState: RequestState.loaded,
+      ),
+    );
+    when(mockWatchlistMovieBloc.state).thenReturn(
+      const WatchlistMovieState(watchlistState: RequestState.loaded),
+    );
+    when(
+      mockWatchlistTvBloc.state,
+    ).thenReturn(const WatchlistTVState(watchlistState: RequestState.loaded));
+  });
+
+  tearDown(() {
+    movieListStreamController.close();
+    tvListStreamController.close();
+    watchlistMovieStreamController.close();
+    watchlistTvStreamController.close();
   });
 
   Widget makeTestable() {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider<MovieListNotifier>.value(
-          value: mockMovieListNotifier,
-        ),
-        ChangeNotifierProvider<TVListNotifier>.value(value: mockTvListNotifier),
-        ChangeNotifierProvider<WatchlistMovieNotifier>.value(
-          value: mockWatchlistMovieNotifier,
-        ),
-        ChangeNotifierProvider<WatchlistTVNotifier>.value(
-          value: mockWatchlistTvNotifier,
-        ),
+        BlocProvider<MovieListBloc>.value(value: mockMovieListBloc),
+        BlocProvider<TVListBloc>.value(value: mockTvListBloc),
+        BlocProvider<WatchlistMovieBloc>.value(value: mockWatchlistMovieBloc),
+        BlocProvider<WatchlistTVBloc>.value(value: mockWatchlistTvBloc),
       ],
       child: MaterialApp(
         home: const HomeMoviePage(),
@@ -97,6 +112,15 @@ void main() {
     expect(find.text('Now Playing'), findsOneWidget);
   });
 
+  testWidgets('initState fetches movies', (tester) async {
+    await tester.pumpWidget(makeTestable());
+    await tester.pump();
+
+    verify(mockMovieListBloc.add(const FetchNowPlayingMovies())).called(1);
+    verify(mockMovieListBloc.add(const FetchPopularMoviesList())).called(1);
+    verify(mockMovieListBloc.add(const FetchTopRatedMoviesList())).called(1);
+  });
+
   testWidgets('drawer tap TV Series shows tv content on the same page', (
     tester,
   ) async {
@@ -111,7 +135,7 @@ void main() {
     expect(find.text('TV Series'), findsWidgets);
     expect(find.text('Airing Today'), findsOneWidget);
     expect(find.text('Top Rated'), findsOneWidget);
-    verify(mockTvListNotifier.fetchAiringTodayTvs()).called(1);
+    verify(mockTvListBloc.add(const FetchAiringTodayTvsList())).called(1);
   });
 
   testWidgets('drawer tap Watchlist shows tabs and empty states', (
@@ -127,7 +151,7 @@ void main() {
     expect(find.byType(Drawer), findsNothing);
     expect(find.text('Movies'), findsWidgets);
     expect(find.byKey(const Key('empty_watchlist_movies')), findsOneWidget);
-    verify(mockWatchlistMovieNotifier.fetchWatchlistMovies())
+    verify(mockWatchlistMovieBloc.add(const FetchWatchlistMovies()))
         .called(greaterThanOrEqualTo(1));
   });
 
@@ -167,12 +191,13 @@ void main() {
   testWidgets('shows progress bars when movie lists are loading', (
     tester,
   ) async {
-    when(mockMovieListNotifier.nowPlayingState)
-        .thenReturn(RequestState.loading);
-    when(mockMovieListNotifier.popularMoviesState)
-        .thenReturn(RequestState.loading);
-    when(mockMovieListNotifier.topRatedMoviesState)
-        .thenReturn(RequestState.loading);
+    when(mockMovieListBloc.state).thenReturn(
+      const MovieListState(
+        nowPlayingState: RequestState.loading,
+        popularMoviesState: RequestState.loading,
+        topRatedMoviesState: RequestState.loading,
+      ),
+    );
 
     await tester.pumpWidget(makeTestable());
     await tester.pump();
@@ -181,7 +206,14 @@ void main() {
   });
 
   testWidgets('movie tap navigates to detail', (tester) async {
-    when(mockMovieListNotifier.nowPlayingMovies).thenReturn([testMovie]);
+    when(mockMovieListBloc.state).thenReturn(
+      const MovieListState(
+        nowPlayingState: RequestState.loaded,
+        nowPlayingMovies: [testMovie],
+        popularMoviesState: RequestState.loaded,
+        topRatedMoviesState: RequestState.loaded,
+      ),
+    );
 
     await tester.pumpWidget(makeTestable());
     await tester.pump();
@@ -229,9 +261,9 @@ void main() {
     Navigator.of(context).pop();
     await tester.pumpAndSettle();
 
-    verify(mockWatchlistMovieNotifier.fetchWatchlistMovies())
+    verify(mockWatchlistMovieBloc.add(const FetchWatchlistMovies()))
         .called(greaterThanOrEqualTo(1));
-    verify(mockWatchlistTvNotifier.fetchWatchlistTvs())
+    verify(mockWatchlistTvBloc.add(const FetchWatchlistTVs()))
         .called(greaterThanOrEqualTo(1));
   });
 }

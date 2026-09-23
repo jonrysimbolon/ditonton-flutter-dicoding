@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+    <domain-config>
+        <domain includeSubdomains="false">api.themoviedb.org</domain>
+        <pin-set expiration="2028-12-31">
+            <pin digest="SHA-256">QfyoR20v8hyYX7L+ikLzM/euPGSDl67gFFcor/sROMs=</pin>
+        </pin-set>
+    </domain-config>
+    <domain-config>
+        <domain includeSubdomains="false">image.tmdb.org</domain>
+        <pin-set expiration="2028-12-31">
+            <pin digest="SHA-256">x9aATKS9J0AN3C/2xh93YRMC0+4JrUrzMMlcKlCTqcQ=</pin>
+        </pin-set>
+    </domain-config>
+</network-security-config>

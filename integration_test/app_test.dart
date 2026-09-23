@@ -1,14 +1,16 @@
 import 'package:ditonton/injection.dart' as di;
 import 'package:ditonton/main.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
-import 'package:ditonton/presentation/widgets/movie_list.dart';
-import 'package:ditonton/presentation/widgets/tv_list.dart';
+import 'package:ditonton_movie/presentation/bloc/movie_detail_bloc.dart';
+import 'package:ditonton_tv/presentation/bloc/tv_detail_bloc.dart';
+import 'package:ditonton_movie/presentation/pages/movie_detail_page.dart';
+import 'package:ditonton_tv/presentation/pages/tv_detail_page.dart';
+import 'package:ditonton_movie/presentation/widgets/movie_card_list.dart';
+import 'package:ditonton_movie/presentation/widgets/movie_list.dart';
+import 'package:ditonton_tv/presentation/widgets/tv_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:provider/provider.dart';
 
 Future<void> pumpFor(WidgetTester tester, Duration duration) async {
   await Future<void>.delayed(duration);
@@ -63,13 +65,13 @@ Future<void> selectFromDrawer(WidgetTester tester, String label) async {
 }
 
 Future<String> movieNameOf(WidgetTester tester) async {
-  final ctx = tester.element(find.byType(Consumer<MovieDetailNotifier>).first);
-  return Provider.of<MovieDetailNotifier>(ctx, listen: false).movie.title;
+  final ctx = tester.element(find.byType(MovieDetailPage).first);
+  return ctx.read<MovieDetailBloc>().state.movie!.title;
 }
 
 Future<String> tvNameOf(WidgetTester tester) async {
-  final ctx = tester.element(find.byType(Consumer<TVDetailNotifier>).first);
-  return Provider.of<TVDetailNotifier>(ctx, listen: false).tv.name;
+  final ctx = tester.element(find.byType(TVDetailPage).first);
+  return ctx.read<TVDetailBloc>().state.tv!.name;
 }
 
 Future<void> goHomeBack(WidgetTester tester) async {
@@ -103,7 +105,7 @@ void main() {
       await tester.tap(find.widgetWithText(ElevatedButton, 'Watchlist').first);
       await pumpUntilFound(
         tester,
-        find.text(MovieDetailNotifier.watchlistAddSuccessMessage),
+        find.text(MovieDetailState.watchlistAddSuccessMessage),
       );
 
       await tester.tap(find.byIcon(Icons.arrow_back).hitTestable().first);
@@ -138,7 +140,7 @@ void main() {
       await tester.tap(find.widgetWithText(FilledButton, 'Watchlist').first);
       await pumpUntilFound(
         tester,
-        find.text(TVDetailNotifier.watchlistAddSuccessMessage),
+        find.text(TVDetailState.watchlistAddSuccessMessage),
       );
 
       final episodeFinder = find.textContaining('episodes').hitTestable();

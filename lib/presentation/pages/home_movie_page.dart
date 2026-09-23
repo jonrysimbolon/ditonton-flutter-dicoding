@@ -1,21 +1,21 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/common/utils.dart';
+import 'package:ditonton_core/common/constants.dart';
+import 'package:ditonton_core/common/state_enum.dart';
+import 'package:ditonton_core/common/utils.dart';
+import 'package:ditonton_movie/presentation/bloc/movie_list_bloc.dart';
+import 'package:ditonton_tv/presentation/bloc/tv_list_bloc.dart';
+import 'package:ditonton_movie/presentation/bloc/watchlist_movie_bloc.dart';
+import 'package:ditonton_tv/presentation/bloc/watchlist_tv_bloc.dart';
+import 'package:ditonton_core/presentation/pages/home_section.dart';
+import 'package:ditonton_movie/presentation/pages/popular_movies_page.dart';
+import 'package:ditonton_movie/presentation/pages/search_page.dart';
+import 'package:ditonton_tv/presentation/pages/search_tv_page.dart';
+import 'package:ditonton_movie/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/widgets/about_content.dart';
-import 'package:ditonton/presentation/pages/home_section.dart';
-import 'package:ditonton/presentation/pages/popular_movies_page.dart';
-import 'package:ditonton/presentation/pages/search_page.dart';
-import 'package:ditonton/presentation/pages/search_tv_page.dart';
-import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_tv_notifier.dart';
-import 'package:ditonton/presentation/widgets/movie_list.dart';
-import 'package:ditonton/presentation/widgets/tv_series_content.dart';
+import 'package:ditonton_movie/presentation/widgets/movie_list.dart';
+import 'package:ditonton_tv/presentation/widgets/tv_series_content.dart';
 import 'package:ditonton/presentation/widgets/watchlist_section.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeMoviePage extends StatefulWidget {
   const HomeMoviePage({super.key});
@@ -33,10 +33,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> with RouteAware {
     super.initState();
     Future.microtask(() {
       if (!mounted) return;
-      Provider.of<MovieListNotifier>(context, listen: false)
-        ..fetchNowPlayingMovies()
-        ..fetchPopularMovies()
-        ..fetchTopRatedMovies();
+      context.read<MovieListBloc>()
+        ..add(const FetchNowPlayingMovies())
+        ..add(const FetchPopularMoviesList())
+        ..add(const FetchTopRatedMoviesList());
     });
   }
 
@@ -52,14 +52,8 @@ class _HomeMoviePageState extends State<HomeMoviePage> with RouteAware {
   }
 
   void _refreshWatchlists() {
-    Provider.of<WatchlistMovieNotifier>(
-      context,
-      listen: false,
-    ).fetchWatchlistMovies();
-    Provider.of<WatchlistTVNotifier>(
-      context,
-      listen: false,
-    ).fetchWatchlistTvs();
+    context.read<WatchlistMovieBloc>().add(const FetchWatchlistMovies());
+    context.read<WatchlistTVBloc>().add(const FetchWatchlistTVs());
   }
 
   void _selectSection(HomeSection section) {
@@ -68,11 +62,11 @@ class _HomeMoviePageState extends State<HomeMoviePage> with RouteAware {
     });
     if (section == HomeSection.tvSeries && !_tvFetched) {
       _tvFetched = true;
-      Provider.of<TVListNotifier>(context, listen: false)
-        ..fetchAiringTodayTvs()
-        ..fetchOnTheAirTvs()
-        ..fetchPopularTvs()
-        ..fetchTopRatedTvs();
+      context.read<TVListBloc>()
+        ..add(const FetchAiringTodayTvsList())
+        ..add(const FetchOnTheAirTvsList())
+        ..add(const FetchPopularTvsList())
+        ..add(const FetchTopRatedTvsList());
     } else if (section == HomeSection.watchlist) {
       _refreshWatchlists();
     }
@@ -176,13 +170,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> with RouteAware {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Now Playing', style: heading6),
-                Consumer<MovieListNotifier>(
-                  builder: (_, data, _) {
-                    final state = data.nowPlayingState;
-                    if (state == RequestState.loading) {
+                BlocBuilder<MovieListBloc, MovieListState>(
+                  builder: (context, state) {
+                    if (state.nowPlayingState == RequestState.loading) {
                       return const Center(child: CircularProgressIndicator());
-                    } else if (state == RequestState.loaded) {
-                      return MovieList(data.nowPlayingMovies);
+                    } else if (state.nowPlayingState == RequestState.loaded) {
+                      return MovieList(state.nowPlayingMovies);
                     } else {
                       return const Text('Failed');
                     }
@@ -194,13 +187,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> with RouteAware {
                     Navigator.pushNamed(context, PopularMoviesPage.routeName);
                   },
                 ),
-                Consumer<MovieListNotifier>(
-                  builder: (_, data, _) {
-                    final state = data.popularMoviesState;
-                    if (state == RequestState.loading) {
+                BlocBuilder<MovieListBloc, MovieListState>(
+                  builder: (context, state) {
+                    if (state.popularMoviesState == RequestState.loading) {
                       return const Center(child: CircularProgressIndicator());
-                    } else if (state == RequestState.loaded) {
-                      return MovieList(data.popularMovies);
+                    } else if (state.popularMoviesState ==
+                        RequestState.loaded) {
+                      return MovieList(state.popularMovies);
                     } else {
                       return const Text('Failed');
                     }
@@ -212,13 +205,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> with RouteAware {
                     Navigator.pushNamed(context, TopRatedMoviesPage.routeName);
                   },
                 ),
-                Consumer<MovieListNotifier>(
-                  builder: (_, data, _) {
-                    final state = data.topRatedMoviesState;
-                    if (state == RequestState.loading) {
+                BlocBuilder<MovieListBloc, MovieListState>(
+                  builder: (context, state) {
+                    if (state.topRatedMoviesState == RequestState.loading) {
                       return const Center(child: CircularProgressIndicator());
-                    } else if (state == RequestState.loaded) {
-                      return MovieList(data.topRatedMovies);
+                    } else if (state.topRatedMoviesState ==
+                        RequestState.loaded) {
+                      return MovieList(state.topRatedMovies);
                     } else {
                       return const Text('Failed');
                     }
