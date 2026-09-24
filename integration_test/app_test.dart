@@ -1,5 +1,6 @@
 import 'package:ditonton/injection.dart' as di;
 import 'package:ditonton/main.dart';
+import 'package:ditonton_core/data/datasources/db/database_helper.dart';
 import 'package:ditonton_movie/presentation/bloc/movie_detail_bloc.dart';
 import 'package:ditonton_tv/presentation/bloc/tv_detail_bloc.dart';
 import 'package:ditonton_movie/presentation/pages/movie_detail_page.dart';
@@ -82,8 +83,11 @@ Future<void> goHomeBack(WidgetTester tester) async {
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  setUpAll(() {
+  setUpAll(() async {
     di.init();
+    final db = await DatabaseHelper().database;
+    await db?.delete('watchlist');
+    await db?.delete('tv_watchlist');
   });
 
   testWidgets(
